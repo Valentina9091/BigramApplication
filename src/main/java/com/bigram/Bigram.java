@@ -15,8 +15,9 @@ import java.util.logging.Logger;
 public class Bigram {
 
 	private static final Logger LOG = Logger.getLogger("Bigram");
-	private static final String pattern = "[^a-zA-Z0-9\\-\\s]";
-	private static final String patternExtraSpaces = "\\s+";
+	private static final String PATTERN = "[^a-zA-Z0-9\\-\\s\\,]";
+	private static final String PATTERN_EXTRA_SPACES = "\\s+";
+	private static final String PATTERN_COMMA = "\\,";
 
 	public static void main(String[] args) {
 		// Check to see if there is missing filename
@@ -96,7 +97,8 @@ public class Bigram {
 		// Changes string to lower case to handle case sensitive
 		// Handles extra space and replaces special characters except hyphen as
 		// hyphen are consider part of words
-		String words[] = text.toLowerCase().replaceAll(pattern, "").replaceAll(patternExtraSpaces, " ").split(" ");
+		String words[] = text.toLowerCase().replaceAll(PATTERN, "").replaceAll(PATTERN_COMMA, " ")
+				.replaceAll(PATTERN_EXTRA_SPACES, " ").split(" ");
 		Map<String, Integer> bigramMap = new LinkedHashMap<String, Integer>();
 		for (int i = 0; i < words.length - 1; i++) {
 			String temp = words[i] + " " + words[i + 1];
